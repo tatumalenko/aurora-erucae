@@ -64,7 +64,7 @@ request.onload = function() {
             e1.location.pads.forEach(e2 => {
                 const card = document.createElement("div");
                 card.setAttribute("class", "card");
-                const h1 = document.createElement("h1");
+                const h1 = document.createElement("p");
                 h1.textContent = e2.name;
                 container.appendChild(card);
                 card.appendChild(h1);
@@ -100,8 +100,12 @@ sidebar.appendChild(container);
 var marker = L.marker([51.09, -0.09]).addTo(map);
 marker.bindPopup("<b>Rocket launch</b><br>Alright").openPopup();
 
-$mapContainer.on('map-container-resize', function () {
-   map.invalidateSize(); // doesn't seem to do anything
+// $mapContainer.on('map-container-resize', function () {
+//    map.invalidateSize(); // doesn't seem to do anything
+// });
+
+$("a[href='#mapContainer']").on('shown.bs.tab', function(e) {
+    map.invalidateSize();
 });
 
 
