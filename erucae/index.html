@@ -21,38 +21,46 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">Rocket Man's Launch Schedule</a>
-        <div class="row" id="thenavbar">
-            <ul class="navbar-nav ml-auto">
+    <nav class="navbar navbar-dark" style="background-color: #1a1a1a">
+    <!-- <div class="container-fluid"> -->
+    <div class="d-flex flex-column">
+    <div class="d-sm-flex flex-row">
+        <a class="navbar-brand" href="index.html" style=""><b>Launch Party</b></a>
+        <div class="row justify-content-end" id="thenavbar">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="#"><img src="res/rocket.png"></a>
                 </li>
+            </ul>
         </div>
+    </div>
+    <small>Map the next rocket launches around the world!</small>
     </div>
     </nav>
     <div class="my-4"> </div>
-    
-    <div class="container-fluid padding">
+
+    <div class="container-fluid padding" id="content">
         <div class="row">
             <!-- Map -->
             <div class="col-md-8 col-sm-12" id="mapContainer">
                 <div id="mapid">
-                    <script>
-                        initmap();
-                    </script>
+                    <script>initmap();</script>
                 </div>
             </div>
-    
+
             <!-- Data -->
-            <div class="col-md-4 col-sm-12 pre-scrollable">
-                <div id="sidebarid"></div>
-                <h1 id="testh"></h1>
+            <div class="col-md-4 col-sm-12" id="rocketinfo">
+                <p id="testg">The next launch at __________ is: </p>
+                <p id="testh">Your rocket launch data will appear here.</p>
             </div>
         </div>
     </div>
     <script type="text/javascript" src="script2.js"></script>
+    <div class="container-fluid">
+    </div>
+
 </body>
+
+
 
 </html>

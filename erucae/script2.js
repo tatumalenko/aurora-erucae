@@ -31,17 +31,17 @@ var histIcon = L.icon({
 // request.onload = function() {
 //     var data = JSON.parse(this.response);
 //     if(request.status >= 200 && request.status < 400) {
-//         data.launches.forEach(e1 => {
-//             e1.location.pads.forEach(e2 => {
+//         data.launches.forEach(launch => {
+//             launch.location.pads.forEach(locationPad => {
 //                 const card = document.createElement("div");
 //                 card.setAttribute("class", "card");
 //                 const h1 = document.createElement("h1");
-//                 h1.textContent = e2.name;
+//                 h1.textContent = locationPad.name;
 //                 container.appendChild(card);
 //                 card.appendChild(h1);
 //
-//                 var x = parseFloat(e2.latitude,10);
-//                 var y = parseFloat(e2.longitude,10);
+//                 var x = parseFloat(locationPad.latitude,10);
+//                 var y = parseFloat(locationPad.longitude,10);
 //                 var ll = L.latLng(x,y);
 //
 //                 var marker = L.marker(ll, {icon: histIcon}).addTo(map);
@@ -60,36 +60,34 @@ request.open("GET","https://launchlibrary.net/1.4/launch/next/50",true);
 request.onload = function() {
     var data = JSON.parse(this.response);
     if(request.status >= 200 && request.status < 400) {
-        data.launches.forEach(e1 => {
-            e1.location.pads.forEach(e2 => {
-                // const card = document.createElement("div");
-                // card.setAttribute("class", "card");
-                // const h1 = document.createElement("p");
-                // h1.textContent = e2.name;
-                // container.appendChild(card);
-                // card.appendChild(h1);
+        data.launches.forEach(launch => {
+            launch.location.pads.forEach(locationPad => {
 
-                var x = parseFloat(e2.latitude,10);
-                var y = parseFloat(e2.longitude,10);
+                var x = parseFloat(locationPad.latitude,10);
+                var y = parseFloat(locationPad.longitude,10);
                 var ll = L.latLng(x,y);
-                var marker = L.marker(ll, {icon: currIcon}).addTo(map).on("click", markerClick);
+                marker = new L.marker(ll, {icon: currIcon}).addTo(map).on("click", markerClick);
 
-                var markerCopy = e2.name;
-                marker.bindPopup(markerCopy);
+                marker.bindPopup(launch.location.name);
 
-                
-                // I have no idea what this is doing...
                 function markerClick(e){
-                
-                    var copy = "" + e1.name + "/n" + e1.windowstart + "/n" + e2.agencies.name;
-                    const card = document.createElement("div");
-                    card.setAttribute("class", "card");
-                    const texts = document.createElement("p");
-                    textx.textContent = copy;
-                    container.appendChild(card);
-                    card.appendChild(h1);
-                }
+                    // document.getElementById("testg").innerHTML = "The next launch at " + (locationPad.name).bold() + " is: "
+                    // var copy = launch.name + "<br>" + launch.windowstart + "<br>" + launch.missions.name + "<br>" + launch.missions.description + "<br>";
+                    // document.getElementById("testh").innerHTML = copy;
 
+                    document.getElementById("testg").innerHTML = "";
+                    document.getElementById("testh").innerHTML = "";
+                    document.getElementById("testg").innerHTML += "The next launch at " + (locationPad.name).bold() + " is: "
+
+                    if (launch.missions.length === 0) {
+                        document.getElementById("testh").innerHTML += "No upcoming launches!";
+                    } else {
+                        for (mission of launch.missions) {
+                            const copy = launch.name + "<br>" + launch.windowstart + "<br><br>" + mission.name + "<br>" + mission.description + "<br>";
+                            document.getElementById("testh").innerHTML += copy;
+                        }
+                    }
+                }
 
             })
         })
@@ -100,15 +98,15 @@ request.onload = function() {
 
 request.send();
 
-const sidebar = document.getElementById("sidebarid");
-const container = document.createElement("div");
-container.setAttribute("class","container");
-sidebar.appendChild(container);
+// const sidebar = document.getElementById("sidebarid");
+// const container = document.createElement("div");
+// container.setAttribute("class","container");
+// sidebar.appendChild(container);
 
 //create a marker with a popup
 
-var marker = L.marker([51.09, -0.09]).addTo(map);
-marker.bindPopup("<b>Rocket launch</b><br>Alright").openPopup();
+// var marker = L.marker([51.09, -0.09]).addTo(map);
+// marker.bindPopup("<b>Rocket launch</b><br>Alright").openPopup();
 
 // $mapContainer.on('map-container-resize', function () {
 //    map.invalidateSize(); // doesn't seem to do anything
