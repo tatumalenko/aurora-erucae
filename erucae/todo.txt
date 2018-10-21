@@ -1,0 +1,3 @@
+1. get the on click data panel working
+2. json theme for the map?
+3. add historical data? (already commented in)

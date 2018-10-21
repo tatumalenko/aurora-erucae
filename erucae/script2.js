@@ -62,24 +62,34 @@ request.onload = function() {
     if(request.status >= 200 && request.status < 400) {
         data.launches.forEach(e1 => {
             e1.location.pads.forEach(e2 => {
-                const card = document.createElement("div");
-                card.setAttribute("class", "card");
-                const h1 = document.createElement("p");
-                h1.textContent = e2.name;
-                container.appendChild(card);
-                card.appendChild(h1);
+                // const card = document.createElement("div");
+                // card.setAttribute("class", "card");
+                // const h1 = document.createElement("p");
+                // h1.textContent = e2.name;
+                // container.appendChild(card);
+                // card.appendChild(h1);
 
                 var x = parseFloat(e2.latitude,10);
                 var y = parseFloat(e2.longitude,10);
                 var ll = L.latLng(x,y);
-                var marker = L.marker(ll, {icon: currIcon}).addTo(map);
+                var marker = L.marker(ll, {icon: currIcon}).addTo(map).on("click", markerClick);
 
-                var copy = "" + e2.name + "\n" + e1.name + "\n" + e1.net + "\n" + e2.infoURL
+                var markerCopy = e2.name;
+                marker.bindPopup(markerCopy);
 
+                
+                // I have no idea what this is doing...
+                function markerClick(e){
+                
+                    var copy = "" + e1.name + "/n" + e1.windowstart + "/n" + e2.agencies.name;
+                    const card = document.createElement("div");
+                    card.setAttribute("class", "card");
+                    const texts = document.createElement("p");
+                    textx.textContent = copy;
+                    container.appendChild(card);
+                    card.appendChild(h1);
+                }
 
-
-
-                marker.bindPopup(copy);
 
             })
         })
@@ -108,6 +118,6 @@ $("a[href='#mapContainer']").on('shown.bs.tab', function(e) {
     map.invalidateSize();
 });
 
-
+setTimeout(function(){ map.invalidateSize()}, 400);
 
 //create array of markers

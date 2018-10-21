@@ -1,6 +1,6 @@
+*{font-family: 'Space Mono', monospace;}
+
 body {
-    padding-top: 100%;
-    padding-bottom: 100%;
     height: 100%;
     overflow: hidden;
     font-size: 12px;
@@ -10,6 +10,10 @@ html, body {
     width: 100%;
     height: 100%;
 }
+.navbar{
+    padding: .8rem;
+}
+
 
 #mapid {
     width: 100%;
@@ -17,6 +21,10 @@ html, body {
     height: 600px;
     margin: 0;
     padding: 0;
-    border: 1px solid black;
-    border-radius: 8px;
+    /* border: 1px solid black; */
+    /* border-radius: 16px; */
+}
+
+#sidebarid {
+    width: 100%;
 }
